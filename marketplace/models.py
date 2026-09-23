@@ -5,14 +5,15 @@ from django.db import models
 class PerfilVendedor(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='perfil_vendedor'
     )
     cpf = models.CharField(max_length=11)
     data_nascimento = models.DateField()
     telefone = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
-        return self.firstname
+        return self.user.first_name
 
     class Meta:
         verbose_name = 'Perfil vendedor'
@@ -21,14 +22,15 @@ class PerfilVendedor(models.Model):
 class PerfilCliente(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='perfil_cliente'
     )
     cpf = models.CharField(max_length=11)
     data_nascimento = models.DateField()
     telefone = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
-        return self.firstname
+        return self.user.first_name
 
     class Meta:
         verbose_name = 'Perfil cliente'
