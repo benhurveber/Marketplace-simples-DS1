@@ -80,7 +80,7 @@ class Pedido(models.Model):
     )
 
     def __str__(self):
-         return f'Pedido nº {self.id} feito por {self.cliente}'
+         return f'ID: {self.id} - Cliente: {self.cliente}'
 
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(
