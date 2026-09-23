@@ -14,6 +14,10 @@ class PerfilVendedor(models.Model):
     def __str__(self):
         return self.firstname
 
+    class Meta:
+        verbose_name = 'Perfil vendedor'
+        verbose_name_plural = 'Perfis vendedores'
+
 class PerfilCliente(models.Model):
     user = models.OneToOneField(
         User,
@@ -25,6 +29,10 @@ class PerfilCliente(models.Model):
 
     def __str__(self):
         return self.firstname
+
+    class Meta:
+        verbose_name = 'Perfil cliente'
+        verbose_name_plural = 'Perfis clientes'
 
 class Tag(models.Model):
     nome = models.CharField(max_length=50)
@@ -87,3 +95,7 @@ class ItemPedido(models.Model):
 
     quantidade = models.IntegerField()
     preco_venda = models.DecimalField(max_digits=8, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Item pedido'
+        verbose_name_plural = 'Itens pedido'
