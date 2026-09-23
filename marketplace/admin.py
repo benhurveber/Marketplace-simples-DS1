@@ -4,16 +4,16 @@ from .models import PerfilVendedor, PerfilCliente, Tag, Pedido, Produto, ItemPed
 # Register your models here.
 @admin.register(PerfilVendedor)
 class PerfilVendedorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', 'firstname', 'cpf', 'data_nascimento', 'telefone')
+    list_display = ('id', 'username', 'email', 'first_name', 'cpf', 'data_nascimento', 'telefone')
 
     def username(self, obj):
         return obj.user.username
 
     def email(self, obj):
-            return obj.user.email
+        return obj.user.email
 
-    def firstname(self, obj):
-            return obj.user.firstname
+    def first_name(self, obj):
+        return obj.user.first_name
 
 @admin.register(PerfilCliente)
 class PerfilClienteAdmin(admin.ModelAdmin):
@@ -25,7 +25,7 @@ class PerfilClienteAdmin(admin.ModelAdmin):
     def email(self, obj):
         return obj.user.email
     
-    def firstname(self, obj):
+    def first_name(self, obj):
         return obj.user.first_name
 
 @admin.register(Tag)

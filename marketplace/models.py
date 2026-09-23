@@ -30,7 +30,7 @@ class PerfilCliente(models.Model):
     telefone = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
-        return self.user.first_name
+        return self.user.first_name 
 
     class Meta:
         verbose_name = 'Perfil cliente'
@@ -50,6 +50,7 @@ class Produto(models.Model):
     )
     tags = models.ManyToManyField (
         Tag,
+        blank=True,
         related_name='produtos'
     )
 
@@ -96,8 +97,14 @@ class ItemPedido(models.Model):
     )
 
     quantidade = models.IntegerField()
-    preco_venda = models.DecimalField(max_digits=8, decimal_places=2)
+    preco_venda = models.DecimalField(max_digits=8, decimal_places=2, editable=False)
 
     class Meta:
         verbose_name = 'Item pedido'
         verbose_name_plural = 'Itens pedido'
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.preco_venda = self.produto.preco
+
+        super().save(*args, **kwargs)
