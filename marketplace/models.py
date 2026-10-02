@@ -62,6 +62,17 @@ class Produto(models.Model):
     def __str__(self):
             return self.nome
 
+class PedidoQuerySet(models.QuerySet):
+     def pedidos_abertos(self):
+          return self.filter(status=Pedido.Status.ABERTO)
+
+class PedidoManager(models.Manager):
+     def get_queryset(self):
+          return PedidoQuerySet(self.model, using=self._db)
+
+     def abertos(self):
+          return self.get_queryset().pedidos_abertos()
+
 class Pedido(models.Model):
     class Status(models.TextChoices):
          ABERTO = 'aberto', 'Aberto'
@@ -78,6 +89,8 @@ class Pedido(models.Model):
     status = models.CharField(
          max_length=15, choices=Status.choices, default=Status.ABERTO
     )
+
+    objects = PedidoManager()
 
     def __str__(self):
          return f'ID: {self.id} - Cliente: {self.cliente}'

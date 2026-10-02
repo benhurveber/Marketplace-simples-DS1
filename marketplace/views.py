@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Count, Sum, Avg, Max, Min
-from .models import Produto
+from .models import Produto, Pedido
 from django.http import JsonResponse
 
 # Create your views here.
@@ -22,3 +22,9 @@ def produtos_vendidos(request):
     dados = list(produtos.values('id', 'nome', 'total_vendido'))
 
     return JsonResponse(dados, safe=False)
+
+def pedidos_abertos(request):
+    pedidos_abertos = Pedido.objects.abertos()
+
+    return JsonResponse(pedidos_abertos, safe=False)
+    
