@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db.models import Count, Sum, Avg, Max, Min
 from .models import Produto, Pedido
 from django.http import JsonResponse
+from .serializers import PedidoSerializer
 
 # Create your views here.
 def estatisticas_produtos(request):
@@ -24,7 +25,9 @@ def produtos_vendidos(request):
     return JsonResponse(dados, safe=False)
 
 def pedidos_abertos(request):
-    pedidos_abertos = Pedido.objects.abertos()
+    query_set_pedidos_abertos = Pedido.objects.abertos()
 
-    return JsonResponse(pedidos_abertos, safe=False)
+    serializer = PedidoSerializer(query_set_pedidos_abertos, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
     
