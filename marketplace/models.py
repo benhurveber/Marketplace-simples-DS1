@@ -60,7 +60,7 @@ class Produto(models.Model):
     quantidade_estoque = models.IntegerField()
 
     def __str__(self):
-            return self.nome
+            return f'ID: {self.id} - {self.nome}'
 
 class PedidoQuerySet(models.QuerySet):
      def pedidos_abertos(self):
