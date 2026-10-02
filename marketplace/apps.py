@@ -6,5 +6,4 @@ class MarketplaceConfig(AppConfig):
     name = 'marketplace'
 
     def ready(self):
-        print('READY EXECUTADO')
         import marketplace.signals
