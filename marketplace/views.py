@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.db.models import Count, Sum, Avg, Max, Min
+from django.db.models import Sum, Avg, Max, Min
 from .models import Produto, Pedido, PerfilVendedor
 from django.http import JsonResponse
 from .serializers import PedidoSerializer, ProdutoSerializer, PerfilVendedorSerializer
 from rest_framework import viewsets 
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 # Create your views here.
 def estatisticas_produtos(request):
@@ -34,8 +35,10 @@ def pedidos_abertos(request):
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
-    serializer_class = ProdutoSerializer
+    serializer_class = ProdutoSerializer    
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class PerfilVendedorViewSet(viewsets.ModelViewSet):
     queryset = PerfilVendedor.objects.all()
     serializer_class = PerfilVendedorSerializer
+    permission_classes = [IsAuthenticated]
