@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.db.models import Count, Sum, Avg, Max, Min
 from .models import Produto, Pedido
 from django.http import JsonResponse
-from .serializers import PedidoSerializer
+from .serializers import PedidoSerializer, ProdutoSerializer
+from rest_framework import viewsets 
 
 # Create your views here.
 def estatisticas_produtos(request):
@@ -30,4 +31,9 @@ def pedidos_abertos(request):
     serializer = PedidoSerializer(query_set_pedidos_abertos, many=True)
 
     return JsonResponse(serializer.data, safe=False)
+
+class ProdutoViewSet(viewsets.ModelViewSet):
+    queryset = Produto.objects.all()
+    serializer_class = ProdutoSerializer
+
     
