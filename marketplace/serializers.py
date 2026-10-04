@@ -12,6 +12,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PerfilVendedorSerializer(serializers.ModelSerializer):
+    produtos = ProdutoSerializer(many=True, read_only=True)
     class Meta:
         model = PerfilVendedor
-        fields = '__all__'
+        fields = ['id', 'cpf', 'data_nascimento', 'telefone', 'user', 'produtos']
