@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.db.models import Count, Sum, Avg, Max, Min
-from .models import Produto, Pedido
+from .models import Produto, Pedido, PerfilVendedor
 from django.http import JsonResponse
-from .serializers import PedidoSerializer, ProdutoSerializer
+from .serializers import PedidoSerializer, ProdutoSerializer, PerfilVendedorSerializer
 from rest_framework import viewsets 
 
 # Create your views here.
@@ -36,4 +36,6 @@ class ProdutoViewSet(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
 
-    
+class PerfilVendedorViewSet(viewsets.ModelViewSet):
+    queryset = PerfilVendedor.objects.all()
+    serializer_class = PerfilVendedorSerializer

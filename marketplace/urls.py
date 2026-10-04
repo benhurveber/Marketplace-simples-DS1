@@ -1,9 +1,10 @@
 from django.urls import path, include
-from .views import estatisticas_produtos, produtos_vendidos, pedidos_abertos, ProdutoViewSet
+from .views import estatisticas_produtos, produtos_vendidos, pedidos_abertos, ProdutoViewSet, PerfilVendedorViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'produtos', ProdutoViewSet, basename='produto')
+router.register(r'vendedores', PerfilVendedorViewSet, basename='vendedor')
 
 urlpatterns = [
     path('estatisticas-produtos/', estatisticas_produtos, name='estatisticas_produtos'),
