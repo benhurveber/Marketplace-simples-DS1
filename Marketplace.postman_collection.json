@@ -1,0 +1,172 @@
+{
+  "info": {
+    "_postman_id": "d1c070b3-3ef5-4d9b-aefb-ed015c04b194",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58124991",
+    "_collection_link": "https://go.postman.co/collection/58124991-d1c070b3-3ef5-4d9b-aefb-ed015c04b194?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Solicitação de tokens",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/api/token/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "token",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Leitura de Vendedores (sem autenticação - 401 Unauthorized)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8000/api/vendedores/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "vendedores",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Leitura de Vendedores (autenticado - 200 OK)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearer_token_04cp}}"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8000/api/vendedores/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "vendedores",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Solicitação de novo Token de acesso",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"refresh\": \"{{json_web_token_03ji}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/api/token/refresh/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "token",
+            "refresh",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Utilizando novo Token para criar Produto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearer_token_0v7x}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Controle de Xbox\",\r\n    \"descricao\": \"Controle de Xbox sem fio\",\r\n    \"preco\": \"299.90\",\r\n    \"quantidade_estoque\": 3,\r\n    \"vendedor\": 1,\r\n    \"tags\": [\r\n        1\r\n    ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/api/produtos/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "produtos",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "bearer_token_04cp",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0rsr",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_03ji",
+      "secret": true
+    },
+    {
+      "key": "bearer_token_0v7x",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0rmp",
+      "secret": true
+    }
+  ]
+}
